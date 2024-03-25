@@ -37,16 +37,6 @@ public class ColaboradorController {
 
 	}
 	
-	public boolean allNum() {
-	
-		String num = "1234";
-		
-		for(int i = 0; i < num.length(); i++ ) {
-			if(!Character.isDigit(num.charAt(i))) {
-				return false;
-			}
-		}
-		return true;
-	}
+
 
 }
