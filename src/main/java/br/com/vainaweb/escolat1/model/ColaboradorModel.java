@@ -29,7 +29,6 @@ import lombok.Setter;
 public class ColaboradorModel {
 	
 
-
 	@Id //Chave Primária
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

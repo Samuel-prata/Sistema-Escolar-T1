@@ -16,20 +16,21 @@ public class ColaboradorService {
 	private ColaboradorRepository repository;
 
 	public List<ColaboradorModel> encontrarTodos() {
-
 		// Método da Repository que faz a query -> SELECT * FROM nome_da_tabela
 		return repository.findAll();
 	}
 
 	public String cadastrar(DadosColaborador dados) {
-		var colaboradorExistente = repository.findByCpf(dados.cpf());
-		
-		if (dados.cpf() == colaboradorExistente.get().getCpf()) {
-			return "Colaborador ja existente";
-		} else {
-			var colaborador = new ColaboradorModel(dados.nome(), dados.email(), dados.cpf(), dados.cargo());
-			repository.save(colaborador);
-			return "Cadastro Feito";
-		}
+		repository.save(new ColaboradorModel(dados.nome(), dados.email(), dados.cpf(), dados.cargo()));
+		return "ok";
+//		var colaboradorExistente = repository.findByCpf(dados.cpf());
+//		
+//		if (dados.cpf() == colaboradorExistente.get().getCpf()) {
+//			return "Colaborador ja existente";
+//		} else {
+//			var colaborador = new ColaboradorModel(dados.nome(), dados.email(), dados.cpf(), dados.cargo());
+//			repository.save(colaborador);
+//			return "Cadastro Feito";
+//		}
 	}
 }
