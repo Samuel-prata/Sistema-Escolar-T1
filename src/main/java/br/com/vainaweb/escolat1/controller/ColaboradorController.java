@@ -42,8 +42,6 @@ public class ColaboradorController {
 		var response = repository.findById(id)
 				.map( resposta -> ResponseEntity.ok(resposta) )
 				.orElse(ResponseEntity.notFound().build());
-		
-		
 		return response;
 	}
 
