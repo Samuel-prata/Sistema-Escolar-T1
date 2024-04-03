@@ -2,6 +2,8 @@ package br.com.vainaweb.escolat1.model;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.vainaweb.escolat1.dto.DadosAtualizados;
+import br.com.vainaweb.escolat1.dto.EnderecoDTO;
 import br.com.vainaweb.escolat1.enums.Cargo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -10,8 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,11 +50,19 @@ public class ColaboradorModel {
 	private Endereco endereco;
 	
 	// |------------------------------------------CONSTRUTORES--------------------------------------|
-	public ColaboradorModel(String nome, String email, String cpf, Cargo cargo) {
+	public ColaboradorModel(String nome, String email, String cpf, Cargo cargo, EnderecoDTO endereco) {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.cargo = cargo;
+		this.endereco = new Endereco(endereco.cep(), endereco.logradouro(), endereco.bairro(), endereco.cidade(), endereco.complemento(), endereco.numero());
+	}
+
+	//|------------------------------------------- MÉTODOS --------------------------------|
+	
+	public void atualizarInfo(@Valid DadosAtualizados dados) {
+		this.nome = dados.nome() != null ? dados.nome() : this.nome;
+		this.email = dados.email()!= null ? dados.email() : this.email;
 	}
 	
 }
